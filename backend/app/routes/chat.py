@@ -3,7 +3,7 @@ import logging
 from fastapi import APIRouter, HTTPException, status
 
 from ..models import ChatRequest, ChatResponse, ErrorResponse
-from ..services.base import ai_service
+from ..services.ai_service_manager import ai_service_manager
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -44,10 +44,14 @@ async def chat(request: ChatRequest) -> ChatResponse:
                 detail="Message cannot be empty",
             )
 
+        # Get the current AI service
+        ai_service = ai_service_manager.get_service()
+
         # Process message through AI service
         logger.info(
-            "Processing chat message for conversation: %s",
+            "Processing chat message for conversation: %s using %s service",
             request.conversation_id,
+            ai_service_manager.get_service_name().upper(),
         )
 
         ai_response, conversation_id = await ai_service.process_message(
@@ -83,4 +87,49 @@ async def chat(request: ChatRequest) -> ChatResponse:
 )
 async def health_check():
     """Health check endpoint for the chat service."""
-    return {"status": "healthy", "service": "chat"}
+    return {
+        "status": "healthy",
+        "service": "chat",
+        "ai_service": ai_service_manager.get_service_name(),
+        "available_services": ai_service_manager.get_available_services(),
+    }
+
+
+@router.get(
+    "/services",
+    summary="Get available AI services",
+    description="Get list of available AI services and current active service",
+)
+async def get_services():
+    """Get information about available AI services."""
+    return {
+        "current_service": ai_service_manager.get_service_name(),
+        "available_services": ai_service_manager.get_available_services(),
+    }
+
+
+@router.post(
+    "/services/switch/{service_name}",
+    summary="Switch AI service",
+    description="Switch to a different AI service",
+)
+async def switch_service(service_name: str):
+    """
+    Switch to a different AI service.
+
+    Args:
+        service_name: Name of the service to switch to (openai, gemini, anthropic, dummy)
+    """
+    success = ai_service_manager.switch_service(service_name)
+
+    if success:
+        return {
+            "success": True,
+            "message": f"Successfully switched to {service_name.upper()} service",
+            "current_service": ai_service_manager.get_service_name(),
+        }
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to switch to {service_name} service. Check if API key is configured.",
+        )

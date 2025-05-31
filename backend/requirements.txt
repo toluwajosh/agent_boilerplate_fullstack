@@ -7,3 +7,5 @@ slowapi==0.1.9
 aiofiles==23.2.1
 openai>=1.59.0
 python-dotenv
+google-generativeai>=0.3.0
+anthropic>=0.7.0

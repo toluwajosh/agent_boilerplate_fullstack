@@ -10,7 +10,6 @@ CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 # OpenAI Configuration (REQUIRED)
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-3.5-turbo
-OPENAI_MAX_TOKENS=150
 OPENAI_TEMPERATURE=0.7
 
 # AI Service Configuration (if using external AI services)

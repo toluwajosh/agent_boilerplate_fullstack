@@ -107,8 +107,7 @@ A boilerplate AI agent application with FastAPI backend and Next.js frontend pro
 
    ```env
    OPENAI_API_KEY=your_actual_openai_api_key_here
-   OPENAI_MODEL=gpt-3.5-turbo
-   OPENAI_MAX_TOKENS=150
+   OPENAI_MODEL=gpt-4o
    OPENAI_TEMPERATURE=0.7
    ```
 
@@ -161,8 +160,7 @@ The application supports various OpenAI configuration options:
 | Environment Variable | Description | Default |
 |---------------------|-------------|---------|
 | `OPENAI_API_KEY` | Your OpenAI API key (required) | None |
-| `OPENAI_MODEL` | OpenAI model to use | `gpt-3.5-turbo` |
-| `OPENAI_MAX_TOKENS` | Maximum tokens in response | `150` |
+| `OPENAI_MODEL` | OpenAI model to use | `gpt-4o` |
 | `OPENAI_TEMPERATURE` | Response creativity (0.0-2.0) | `0.7` |
 
 ### Fallback Mode

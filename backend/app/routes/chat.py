@@ -3,7 +3,7 @@ import logging
 from fastapi import APIRouter, HTTPException, status
 
 from ..models import ChatRequest, ChatResponse, ErrorResponse
-from ..services.ai_service import ai_service
+from ..services.base import ai_service
 
 # Configure logging
 logger = logging.getLogger(__name__)

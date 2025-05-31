@@ -1,0 +1,99 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+.env.development
+.env.production
+.env.staging
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+__archive__/
+*__local*
+
+# ===========================================
+# AI Agent Frontend Specific - SECURITY CRITICAL
+# ===========================================
+
+# API Keys and Configuration - NEVER COMMIT THESE!
+.env.secrets
+config/secrets.*
+src/config/api-keys.*
+public/config.*
+
+# Build artifacts and caches
+.next/
+.swc/
+.turbo/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*_backup.*
+
+# Package manager files (keep package-lock.json but ignore alternatives)
+yarn.lock
+pnpm-lock.yaml
+
+# Storybook build outputs
+storybook-static/
+
+# PWA files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/fallback-*.js
+
+# Sentry
+.sentryclirc
+
+# Local development
+.env.local.backup
+.env.development.backup
